@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajouter un nouveau dispositif</title>
+</head>
+<body>
+
+<h1>Ajouter un nouveau dispositif</h1>
+
+<form id="newDeviceForm" method="POST" action="new_device" >
+  <label for="nom">Nom du dispositif :</label><br>
+  <input type="text" id="nom" name="nom"><br><br>
+  
+  <label for="localisation">Localisation :</label><br>
+  <input type="text" id="localisation" name="localisation"><br><br>
+  
+  <button type="submit" >Ajouter</button>
+</form>
+
+<h1>Modifier un dispositif</h1>
+
+<form id="updateDeviceForm">
+    <label for="id">ID du dispositif :</label><br>
+    <input type="text" id="id" name="id"><br><br>
+    
+    <label for="nom2">Nom du dispositif :</label><br>
+    <input type="text" id="nom2" name="nom2"><br><br>
+    
+    <label for="localisation2">Localisation :</label><br>
+    <input type="text" id="localisation2" name="localisation2"><br><br>
+    
+    <button type="button" onclick="submitForm()">Modifier</button>
+  </form>
+  
+
+  <h1>Supprimer un dispositif</h1>
+
+<form id="deleteDeviceForm">
+    <label for="id3">ID du dispositif :</label><br>
+    <input type="text" id="id3" name="id3"><br><br>
+    
+    <button type="button" onclick="deleteDevice()">Supprimer</button>
+</form>
+
+
+<script>
+async function submitForm() {
+  const id = document.getElementById("id").value;
+  const nom = document.getElementById("nom2").value;
+  const localisation = document.getElementById("localisation2").value;
+  console.log("ID:", id);
+  console.log("Nom:", nom);
+  console.log("Localisation:", localisation);
+  
+  try {
+    const response = await fetch(`/device_update/${id}`, { // Utilisation de l'ID saisi par l'utilisateur dans l'URL de la requête
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ nom, localisation })
+    });
+    
+    const updatedDevice = await response.json();
+    console.log(updatedDevice);
+    
+    alert("Dispositif mis à jour avec succès !");
+    window.location.href = "/devices"; 
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour du dispositif :", error);
+    alert("Une erreur s'est produite lors de la mise à jour du dispositif. Veuillez réessayer plus tard.");
+  }
+}
+
+
+
+async function deleteDevice() {
+  const id = document.getElementById("id3").value;
+  console.log("ID du dispositif à supprimer :", id);
+  
+  try {
+    const response = await fetch(`/device_delete/${id}`, { // Utilisation de l'ID saisi par l'utilisateur dans l'URL de la requête
+      method: "DELETE"
+    });
+    
+    if (response.ok) {
+      const deletedDevice = await response.json();
+      console.log("Dispositif supprimé :", deletedDevice);
+      alert("Dispositif supprimé avec succès !");
+      window.location.href = "/devices"; // Rediriger vers une autre page après la suppression
+    } else {
+      const errorMessage = await response.text();
+      console.error("Erreur lors de la suppression du dispositif :", errorMessage);
+      alert("Une erreur s'est produite lors de la suppression du dispositif. Veuillez réessayer plus tard.");
+    }
+  } catch (error) {
+    console.error("Erreur lors de la suppression du dispositif :", error);
+    alert("Une erreur s'est produite lors de la suppression du dispositif. Veuillez réessayer plus tard.");
+  }
+}
+</script>
+</body>
+</html>
