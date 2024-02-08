@@ -35,7 +35,7 @@ app.get("/devices/:id", async (req, res) => {
   });
   res.status(200).json(device);
 });
-//supprimer 
+//supprimer device
 app.delete("/device_delete/:id", async (req, res) => {
   const {id} = req.params;
   const device = await prisma.device.delete({
