@@ -57,7 +57,7 @@ app.put("/device_update/:id", async (req, res) => {
     res.status(200).json(updatedDevice);
   
 });
-
+// ici c'est la table data
 
 app.get("/data/:id/:debut/:fin", async (req, res) => {
   const { id, debut, fin } = req.params;
