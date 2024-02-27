@@ -1,52 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajouter un nouveau dispositif</title>
+<title>Api</title>
+<link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+<div class="container">
 
-<h1>Ajouter un nouveau dispositif</h1>
+  <div class="container">
+    <div class="dropdown">
+      <button class="dropbtn" >Menu</button>
+      <div class="dropdown-content">
+        <a href="ajouter.html" onclick="loadContent('ajouter.html')">Ajouter</a>
+        <a href="modifier.html" onclick="loadContent('modifier.html')">Modifier</a>
+        <a href="supprimer.html" onclick="loadContent('supprimer.html')">Supprimer</a>
+        <a href="table.html" onclick="loadContent('table.html')">Afficher tous les dispositifs</a>
+        <a href="date.html" onclick="loadContent('date.html')">Dispositif en fonction des dates </a>
 
-<form id="newDeviceForm" method="POST" action="new_device" >
-  <label for="nom">Nom du dispositif :</label><br>
-  <input type="text" id="nom" name="nom"><br><br>
-  
-  <label for="localisation">Localisation :</label><br>
-  <input type="text" id="localisation" name="localisation"><br><br>
-  
-  <button type="submit" >Ajouter</button>
-</form>
 
-<h1>Modifier un dispositif</h1>
+      </div>
+    </div>
 
-<form id="updateDeviceForm">
-    <label for="id">ID du dispositif :</label><br>
-    <input type="text" id="id" name="id"><br><br>
+    <div id="content">
+      <!-- Contenu de la page chargée sera affiché ici -->
+    </div>
     
-    <label for="nom2">Nom du dispositif :</label><br>
-    <input type="text" id="nom2" name="nom2"><br><br>
-    
-    <label for="localisation2">Localisation :</label><br>
-    <input type="text" id="localisation2" name="localisation2"><br><br>
-    
-    <button type="button" onclick="submitForm()">Modifier</button>
-  </form>
-  
-
-  <h1>Supprimer un dispositif</h1>
-
-<form id="deleteDeviceForm">
-    <label for="id3">ID du dispositif :</label><br>
-    <input type="text" id="id3" name="id3"><br><br>
-    
-    <button type="button" onclick="deleteDevice()">Supprimer</button>
-</form>
-
+</div>
 
 <script>
-async function submitForm() {
+  function loadContent(url) {
+    // Empêcher le comportement par défaut du lien
+    event.preventDefault();
+  
+    // Charger le contenu de la page cible dans la section de contenu
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('content').innerHTML = data;
+      })
+      .catch(error => console.error('Erreur:', error));
+  }
+  async function submitForm() {
   const id = document.getElementById("id").value;
   const nom = document.getElementById("nom2").value;
   const localisation = document.getElementById("localisation2").value;
@@ -67,15 +63,12 @@ async function submitForm() {
     console.log(updatedDevice);
     
     alert("Dispositif mis à jour avec succès !");
-    window.location.href = "/devices"; 
+    window.location.href = "forms.html"; 
   } catch (error) {
     console.error("Erreur lors de la mise à jour du dispositif :", error);
     alert("Une erreur s'est produite lors de la mise à jour du dispositif. Veuillez réessayer plus tard.");
   }
 }
-
-
-
 async function deleteDevice() {
   const id = document.getElementById("id3").value;
   console.log("ID du dispositif à supprimer :", id);
@@ -89,7 +82,7 @@ async function deleteDevice() {
       const deletedDevice = await response.json();
       console.log("Dispositif supprimé :", deletedDevice);
       alert("Dispositif supprimé avec succès !");
-      window.location.href = "/devices"; // Rediriger vers une autre page après la suppression
+      window.location.href = "forms.html"; // Rediriger vers une autre page après la suppression
     } else {
       const errorMessage = await response.text();
       console.error("Erreur lors de la suppression du dispositif :", errorMessage);
@@ -100,6 +93,43 @@ async function deleteDevice() {
     alert("Une erreur s'est produite lors de la suppression du dispositif. Veuillez réessayer plus tard.");
   }
 }
-</script>
+
+async function showDeviceTable() {
+  try {
+    const response = await fetch("/devices");
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des dispositifs.");
+    }
+    const devices = await response.json();
+    displayDeviceTable(devices);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des dispositifs :", error);
+    alert("Une erreur s'est produite lors de la récupération des dispositifs. Veuillez réessayer plus tard.");
+  }
+}
+
+function displayDeviceTable(devices) {
+  const tableBody = document.getElementById("deviceTableBody");
+  tableBody.innerHTML = ""; // Nettoyer le contenu précédent
+  
+  devices.forEach(device => {
+    const row = document.createElement("tr");
+    const idCell = document.createElement("td");
+    const nomCell = document.createElement("td");
+    const localisationCell = document.createElement("td");
+    
+    idCell.textContent = device.id;
+    nomCell.textContent = device.nom;
+    localisationCell.textContent = device.localisation;
+    
+    row.appendChild(idCell);
+    row.appendChild(nomCell);
+    row.appendChild(localisationCell);
+    
+    tableBody.appendChild(row);
+  });
+}
+
+  </script>
 </body>
 </html>

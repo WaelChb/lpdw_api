@@ -25,7 +25,8 @@ app.post("/new_device", async (req,res)=>{
     },
 
   });
-  res.json(result);
+  res.redirect("/forms.html");
+  
 })
 //un devices avec l'id
 app.get("/devices/:id", async (req, res) => {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date dispositif</title>
+</head>
+<body>
+  <h2>Recherche de dispositif par plage de temps</h2>
+  <!-- Champ de saisie pour l'ID du dispositif -->
+  <form id="searchForm" action="/data" method="GET">
+    
+  <label for="deviceId">ID du dispositif :</label><br>
+  <input type="text" id="deviceId" name="id"><br><br>
+  
+    <label for="startDate">Date de début :</label><br>
+    <input type="date" id="startDate" name="debut"><br><br>
+    
+    <label for="endDate">Date de fin :</label><br>
+    <input type="date" id="endDate" name="fin"><br><br>
+    
+    
+    <button type="submit">Rechercher</button>
+  </form>
+
+</body>
+</html>

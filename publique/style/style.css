@@ -1,0 +1,138 @@
+/* Style CSS pour le menu déroulant */
+
+.container{
+  max-width: 1000px; /* ajustez la largeur maximale selon vos besoins */
+  margin: 0 auto; /* centre le contenu horizontalement */
+  padding: 0 20px; 
+}
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  background-color: #45a049;
+}
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+a{
+    text-decoration: none;
+}  
+
+/* Style du tableau */
+table {
+  border-collapse: collapse;
+  width: 100%; /* Largeur du tableau */
+}
+
+/* Style des cellules du tableau */
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* Style des lignes impaires du tableau */
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Style du tableau lorsqu'il est survolé */
+
+tr:hover {
+  background-color: #ff9900; /* Changer la couleur de fond au survol */
+}
+
+Form {
+  max-width: 400px; /* Largeur maximale du formulaire */
+  margin: 0 auto; /* Centrer le formulaire horizontalement */
+  padding: 20px; /* Ajouter un espacement intérieur */
+  border: 1px solid #ccc; /* Ajouter une bordure */
+  border-radius: 5px; /* Ajouter des coins arrondis */
+}
+
+/* Style des libellés */
+label {
+  display: block; /* Afficher les libellés sur une nouvelle ligne */
+  margin-bottom: 10px; /* Ajouter un espacement en bas */
+}
+
+/* Style des champs de saisie */
+ input[type="text"] {
+  width: 100%; /* Prendre toute la largeur disponible */
+  padding: 8px; /* Ajouter un espacement intérieur */
+  margin-bottom: 15px; /* Ajouter un espacement en bas */
+  border: 1px solid #ccc; /* Ajouter une bordure */
+  border-radius: 4px; /* Ajouter des coins arrondis */
+  box-sizing: border-box; /* Inclure la bordure et le padding dans la largeur */
+}
+
+/* Style du bouton */
+Form button[type="submit"] {
+  background-color: #0056b3; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  padding: 10px 20px; /* Ajouter un espacement intérieur */
+  border: none; /* Supprimer la bordure */
+  border-radius: 4px; /* Ajouter des coins arrondis */
+  cursor: pointer; /* Afficher le curseur en pointeur au survol */
+}
+
+/* Style du bouton au survol */
+Form button[type="submit"]:hover {
+  background-color: #0056b3; /* Couleur de fond du bouton au survol */
+}
+
+button[type="button"] {
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement intérieur du bouton */
+  border: none; /* Supprimer la bordure */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointeur au survol */
+}
+
+button[type="button"]:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+h1 {
+  font-size: 24px; /* Taille de la police */
+  color: #333; /* Couleur du texte */
+  margin-bottom: 20px; /* Espacement en bas */
+}
